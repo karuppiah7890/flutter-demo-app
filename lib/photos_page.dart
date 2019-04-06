@@ -17,7 +17,7 @@ class _PhotosPageState extends State<PhotosPage> {
     fetchData();
   }
 
-  fetchData() async {
+  Future<void> fetchData() async {
     var url = "https://picsum.photos/list";
 
     var response = await http.get(url);
@@ -31,25 +31,28 @@ class _PhotosPageState extends State<PhotosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Photos Page"),
-      ),
-      body: photosList == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: photosList.length,
-              itemBuilder: (BuildContext context, int index) => Card(
-                    child: ListTile(
-                      title: Text(photosList[index]['filename']),
-                      subtitle: Text(photosList[index]['author']),
-                      leading: CircleAvatar(
-                        child: Text(photosList[index]['id'].toString()),
-                      ),
-                      trailing: Text(photosList[index]['format']),
-                    ),
-                  )),
-    );
+        appBar: AppBar(
+          title: Text("Photos Page"),
+        ),
+        body: photosList == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : RefreshIndicator(
+                child: ListView.builder(
+                    itemCount: photosList.length,
+                    itemBuilder: (BuildContext context, int index) => Card(
+                          elevation: 0.0,
+                          child: ListTile(
+                            title: Text(photosList[index]['filename']),
+                            subtitle: Text(photosList[index]['author']),
+                            leading: CircleAvatar(
+                              child: Text(photosList[index]['id'].toString()),
+                            ),
+                            trailing: Text(photosList[index]['format']),
+                          ),
+                        )),
+                onRefresh: fetchData,
+              ));
   }
 }
