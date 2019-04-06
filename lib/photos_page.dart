@@ -40,12 +40,16 @@ class _PhotosPageState extends State<PhotosPage> {
             )
           : ListView.builder(
               itemCount: photosList.length,
-              itemBuilder: (BuildContext context, int index) => ListTile(
-                    title: Text(photosList[index]['filename']),
-                    subtitle: Text(photosList[index]['author']),
-                    trailing: Text(photosList[index]['format']),
-                  ),
-            ),
+              itemBuilder: (BuildContext context, int index) => Card(
+                    child: ListTile(
+                      title: Text(photosList[index]['filename']),
+                      subtitle: Text(photosList[index]['author']),
+                      leading: CircleAvatar(
+                        child: Text(photosList[index]['id'].toString()),
+                      ),
+                      trailing: Text(photosList[index]['format']),
+                    ),
+                  )),
     );
   }
 }
