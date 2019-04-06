@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pk_skeleton/pk_skeleton.dart';
 
 class PhotosPage extends StatefulWidget {
   @override
@@ -36,7 +37,9 @@ class _PhotosPageState extends State<PhotosPage> {
         ),
         body: photosList == null
             ? Center(
-                child: CircularProgressIndicator(),
+                child: PKCardListSkeleton(
+                  isBottomLinesActive: false,
+                ),
               )
             : RefreshIndicator(
                 child: ListView.builder(
