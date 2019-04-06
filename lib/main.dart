@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'photos_page.dart';
 
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Chennai',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePage()));
+      home: PhotosPage()));
 }
 
 class HomePage extends StatelessWidget {
